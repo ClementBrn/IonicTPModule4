@@ -1,24 +1,37 @@
-<div *ngIf="!cacherFormulaire">
-    <h2><label>Votre pseudo</label></h2>
-    <input type="text" [(ngModel)]="Pseudo" name="Pseudo"  placeholder="pseudo"/> <br />
-    <h2><label>Difficulté</label></h2>
-    <!--<select [(ngModel)]="difficulte" name="difficulte">
-      <option value="Easy">Easy</option>
-      <option value="Medium">Medium</option>
-      <option value="Hard">Hard</option>
-    </select> --><br/>
-    <h4>Se souvenir de moi</h4>
-    <input type="checkbox"/> <br/>
-    <p [ngModel]="MessageErreur"  class="error">{{MessageErreur}}</p>
-    <button (click)="StartGame()">Commencer</button>
+  <div class="ion-text-center" *ngIf="!cacherFormulaire">
+    <ion-item>
+      <ion-label floating>Votre pseudo</ion-label>
+      <ion-input type="string"[(ngModel)]="Pseudo"></ion-input> <br />
+    </ion-item>
+    <ion-item>
+      <ion-label>Difficulté</ion-label>
+      <ion-select [(ngModel)]="difficulte" placeholder>
+        <ion-select-option value="Easy">Easy</ion-select-option>
+        <ion-select-option value="Medium">Medium</ion-select-option> 
+        <ion-select-option value="Hard">Hard</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <h4>Se souvenir de moi</h4>
+      <ion-toggle></ion-toggle>
+    </ion-item>
+      <p class="error">{{MessageErreur}}</p>
+    <ion-item>
+      <ion-button color="primary" (click)="StartGame()">Commencer</ion-button>
+    </ion-item>
+  </div>
 
-</div>
-<div *ngIf="cacherFormulaire">
-    <h3>Bienvenue {{Pseudo}}</h3>
+  <div class="ion-text-center" *ngIf="cacherFormulaire">
+    <ion-text color="primary"> 
+      <p class="ion-text-center">Bienvenue {{ Pseudo }}</p>       
+    </ion-text>  
     <div>
-      <h2>{{Question}}</h2>
+      <h2 class="ion-text-center">{{Question}}</h2>
     </div>
-    <div *ngFor="let item of ListeReponse">
-        <button style="display: inline-block;">{{item}}</button>
+    <div style="display: inline-block;" *ngFor="let item of ListeReponse">
+      <ion-button color="danger">{{item}}</ion-button>
     </div>
-</div>
+    <div class="ion-text-center">
+      <ion-button color="primary">QUestion suivante</ion-button>
+    </div>
+  </div>

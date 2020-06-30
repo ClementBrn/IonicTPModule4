@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login-form',
@@ -10,21 +11,29 @@ export class LoginFormComponent implements OnInit {
   public Pseudo='';
   public cacherFormulaire = false;
   public Error= false;
-  public MessageErreur='';
+  public Message="Veuillez rentrer un pseudo ou choisir une difficulté";
   public Question = "Quelle est la date de la bataille de Marignan ?";
   public ListeReponse: string[] = ["1515", "1616", "1717", "1818"];
   public difficulte='';
-  constructor() { }
+  constructor(public toastCtrl: ToastController) { }
 
   ngOnInit() {}
 
+  async ShowToast(Message: string) {
+    const toast = await this.toastCtrl.create({
+      color: "danger",
+      message: Message,
+      duration: 3000
+    });
+    toast.present();
+  }
+
   StartGame() {
-    this.MessageErreur='';
     console.log("Difficulte "+this.difficulte);
-    if(this.Pseudo.length <3 /*|| this.difficulte == ''*/)
+    if(this.Pseudo.length <3 || this.difficulte === '')
     {
-      this.MessageErreur="Vous devez rentrer un pseudo et choisir une difficulté";
       this.cacherFormulaire = false;
+      this.ShowToast(this.Message);
     }
     else
     {
