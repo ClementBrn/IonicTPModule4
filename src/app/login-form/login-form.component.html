@@ -1,0 +1,24 @@
+<div *ngIf="!cacherFormulaire">
+    <h2><label>Votre pseudo</label></h2>
+    <input type="text" [(ngModel)]="Pseudo" name="Pseudo"  placeholder="pseudo"/> <br />
+    <h2><label>Difficulté</label></h2>
+    <!--<select [(ngModel)]="difficulte" name="difficulte">
+      <option value="Easy">Easy</option>
+      <option value="Medium">Medium</option>
+      <option value="Hard">Hard</option>
+    </select> --><br/>
+    <h4>Se souvenir de moi</h4>
+    <input type="checkbox"/> <br/>
+    <p [ngModel]="MessageErreur"  class="error">{{MessageErreur}}</p>
+    <button (click)="StartGame()">Commencer</button>
+
+</div>
+<div *ngIf="cacherFormulaire">
+    <h3>Bienvenue {{Pseudo}}</h3>
+    <div>
+      <h2>{{Question}}</h2>
+    </div>
+    <div *ngFor="let item of ListeReponse">
+        <button style="display: inline-block;">{{item}}</button>
+    </div>
+</div>
